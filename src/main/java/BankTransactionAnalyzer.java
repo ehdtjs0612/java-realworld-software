@@ -20,8 +20,4 @@ public class BankTransactionAnalyzer {
         System.out.println("Your January total amount is " + bankTransactionProcessor.monthCaclulateTotalAmount(Month.JANUARY));
         System.out.println("Your select category amount is " + bankTransactionProcessor.yourCategoryCalculateTotalAmount("Royalties"));
     }
-
-
-
-
 }
