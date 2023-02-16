@@ -1,15 +1,14 @@
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.time.LocalDate;
 import java.time.Month;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class BankTransactionAnalyzer {
     private static final String RESOURCE = "/Users/yoodongseon/Desktop/유동선/RealWorldSoftware/src/main/resources/bank-data-simple.csv";
 
     public static void main(String[] args) throws IOException {
+        BankStatementCSVParser parser = new BankStatementCSVParser();
 
         Path path = Path.of(RESOURCE);
         List<String> lines = Files.readAllLines(path);
