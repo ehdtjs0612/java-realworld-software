@@ -7,16 +7,14 @@ import java.util.List;
 public class BankTransactionAnalyzer {
     private static final String RESOURCE = "/Users/yoodongseon/Desktop/유동선/RealWorldSoftware/src/main/resources/bank-data-simple.csv";
 
-    public static void main(String[] args) throws IOException {
-        BankStatementCSVParser parser = new BankStatementCSVParser();
+    public void analyzedFile(BankStatementParser bankStatementParser) throws IOException {
+        Path file = Path.of(RESOURCE);
+        List<String> lists = Files.readAllLines(file);
 
-        Path path = Path.of(RESOURCE);
-        List<String> lines = Files.readAllLines(path);
+        List<BankTransaction> bankTransactions = bankStatementParser.parseLine(lists);
+        BankTransactionProcessor processor = new BankTransactionProcessor(bankTransactions);
 
-        List<BankTransaction> bankTransactions = parser.parseLineFromCSV(lines);
-        BankTransactionProcessor bankTransactionProcessor = new BankTransactionProcessor(bankTransactions);
-
-        printInformation(bankTransactionProcessor);
+        printInformation(processor);
     }
 
     private static void printInformation(BankTransactionProcessor bankTransactionProcessor) {
