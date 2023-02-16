@@ -16,6 +16,10 @@ public class BankTransactionAnalyzer {
         List<BankTransaction> bankTransactions = parser.parseLineFromCSV(lines);
         BankTransactionProcessor bankTransactionProcessor = new BankTransactionProcessor(bankTransactions);
 
+        printInformation(bankTransactionProcessor);
+    }
+
+    private static void printInformation(BankTransactionProcessor bankTransactionProcessor) {
         System.out.println("Your transaction total amount is " + bankTransactionProcessor.calculateTotalAmount());
         System.out.println("Your January total amount is " + bankTransactionProcessor.monthCaclulateTotalAmount(Month.JANUARY));
         System.out.println("Your select category amount is " + bankTransactionProcessor.yourCategoryCalculateTotalAmount("Royalties"));
