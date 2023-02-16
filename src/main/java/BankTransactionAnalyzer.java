@@ -13,17 +13,32 @@ public class BankTransactionAnalyzer {
 
         Path path = Path.of(RESOURCE);
         List<String> lines = Files.readAllLines(path);
-        double total = 0d;
-        DateTimeFormatter DATE_PATTERN = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
-        for(String line : lines) {
-            String[] colums = line.split(",");
-            LocalDate date = LocalDate.parse(colums[0], DATE_PATTERN);
-            if(date.getMonth() == Month.JANUARY) {
-                double amount = Double.parseDouble(colums[1]);
-                total += amount;
+        List<BankTransaction> bankTransactions = parser.parseLineFromCSV(lines);
+
+        System.out.println("Your transaction total amount is " + calculateTotalAmount(bankTransactions));
+        System.out.println("Your January total amount is " + monthCaclulateTotaAmount(bankTransactions, Month.JANUARY));
+    }
+
+    private static Double calculateTotalAmount(List<BankTransaction> bankTransactions) {
+        double totalAmount = 0d;
+
+        for(BankTransaction bankTransaction : bankTransactions) {
+            totalAmount += bankTransaction.getAmount();
+        }
+
+        return totalAmount;
+    }
+
+    private static double monthCaclulateTotaAmount(List<BankTransaction> bankTransactions, Month month) {
+        double totalAmount = 0d;
+
+        for(BankTransaction bankTransaction : bankTransactions) {
+            if(bankTransaction.getLocalDate().getMonth() == month) {
+                totalAmount += bankTransaction.getAmount();
             }
         }
-        System.out.println("Your transaction total amount is " + total);
+
+        return totalAmount;
     }
 }
