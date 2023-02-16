@@ -14,30 +14,14 @@ public class BankTransactionAnalyzer {
         List<String> lines = Files.readAllLines(path);
 
         List<BankTransaction> bankTransactions = parser.parseLineFromCSV(lines);
+        BankTransactionProcessor bankTransactionProcessor = new BankTransactionProcessor(bankTransactions);
 
-        System.out.println("Your transaction total amount is " + calculateTotalAmount(bankTransactions));
-        System.out.println("Your January total amount is " + monthCaclulateTotaAmount(bankTransactions, Month.JANUARY));
+        System.out.println("Your transaction total amount is " + bankTransactionProcessor.calculateTotalAmount());
+        System.out.println("Your January total amount is " + bankTransactionProcessor.monthCaclulateTotaAmount(Month.JANUARY));
+        System.out.println("Your select category amount is " + bankTransactionProcessor.yourCategoryCalculateTotalAmount("Royalties"));
     }
 
-    private static Double calculateTotalAmount(List<BankTransaction> bankTransactions) {
-        double totalAmount = 0d;
 
-        for(BankTransaction bankTransaction : bankTransactions) {
-            totalAmount += bankTransaction.getAmount();
-        }
 
-        return totalAmount;
-    }
 
-    private static double monthCaclulateTotaAmount(List<BankTransaction> bankTransactions, Month month) {
-        double totalAmount = 0d;
-
-        for(BankTransaction bankTransaction : bankTransactions) {
-            if(bankTransaction.getLocalDate().getMonth() == month) {
-                totalAmount += bankTransaction.getAmount();
-            }
-        }
-
-        return totalAmount;
-    }
 }
