@@ -17,7 +17,7 @@ public class BankTransactionAnalyzer {
         BankTransactionProcessor bankTransactionProcessor = new BankTransactionProcessor(bankTransactions);
 
         System.out.println("Your transaction total amount is " + bankTransactionProcessor.calculateTotalAmount());
-        System.out.println("Your January total amount is " + bankTransactionProcessor.monthCaclulateTotaAmount(Month.JANUARY));
+        System.out.println("Your January total amount is " + bankTransactionProcessor.monthCaclulateTotalAmount(Month.JANUARY));
         System.out.println("Your select category amount is " + bankTransactionProcessor.yourCategoryCalculateTotalAmount("Royalties"));
     }
 

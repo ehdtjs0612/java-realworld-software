@@ -19,7 +19,7 @@ public class BankTransactionProcessor {
         return totalAmount;
     }
 
-    public double monthCaclulateTotaAmount(Month month) {
+    public double monthCaclulateTotalAmount(Month month) {
         double totalAmount = 0d;
 
         for(BankTransaction bankTransaction : bankTransactions) {
