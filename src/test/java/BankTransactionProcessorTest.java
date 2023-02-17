@@ -10,14 +10,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class BankTransactionProcessorTest {
 
-    List<BankTransaction> bankTransactionList;
-    BankTransactionProcessor bankTransactionProcessor;
-
-    Month month;
-
-    String category;
-
-    int graterThan;
+    private List<BankTransaction> bankTransactionList;
+    private BankTransactionProcessor bankTransactionProcessor;
+    private Month month;
+    private String category;
+    private int greaterThan;
 
     @BeforeEach
     public void setUp() {
@@ -25,69 +22,68 @@ class BankTransactionProcessorTest {
         bankTransactionProcessor = new BankTransactionProcessor(bankTransactionList);
         month = Month.MAY;
         category = "Tesco";
-        graterThan = 3000;
+        greaterThan = 3000;
     }
 
     private List<BankTransaction> createBankTransaction() {
         List<BankTransaction> bankTransactionList = new ArrayList<>();
-        bankTransactionList.add(new BankTransaction((LocalDate.of(2017, Month.JANUARY, 30)), -100d, "Deliveroo"));
-        bankTransactionList.add(new BankTransaction((LocalDate.of(2017, Month.JANUARY, 30)), -50d, "Tesco"));
-        bankTransactionList.add(new BankTransaction((LocalDate.of(2017, Month.FEBRUARY, 01)), 6000d, "Salary"));
-        bankTransactionList.add(new BankTransaction((LocalDate.of(2017, Month.FEBRUARY, 02)), 2000d, "Royalties"));
-        bankTransactionList.add(new BankTransaction((LocalDate.of(2017, Month.FEBRUARY, 03)), -4000d, "Rent"));
-        bankTransactionList.add(new BankTransaction((LocalDate.of(2017, Month.MARCH, 03)), 3000d, "Tesco"));
-        bankTransactionList.add(new BankTransaction((LocalDate.of(2017, Month.MAY, 05)), -30d, "Cinema"));
+        bankTransactionList.add(new BankTransaction(LocalDate.of(2017, Month.JANUARY, 30), -100d, "Deliveroo"));
+        bankTransactionList.add(new BankTransaction(LocalDate.of(2017, Month.JANUARY, 30), -50d, "Tesco"));
+        bankTransactionList.add(new BankTransaction(LocalDate.of(2017, Month.FEBRUARY, 01), 6000d, "Salary"));
+        bankTransactionList.add(new BankTransaction(LocalDate.of(2017, Month.FEBRUARY, 02), 2000d, "Royalties"));
+        bankTransactionList.add(new BankTransaction(LocalDate.of(2017, Month.FEBRUARY, 03), -4000d, "Rent"));
+        bankTransactionList.add(new BankTransaction(LocalDate.of(2017, Month.MARCH, 03), 3000d, "Tesco"));
+        bankTransactionList.add(new BankTransaction(LocalDate.of(2017, Month.MAY, 05), -30d, "Cinema"));
         return bankTransactionList;
     }
 
     @Test
-    public void calculateTotalAmount() {
+    public void testCalculateTotalAmount() {
         // given
-        double total = 6820d;
+        double expected = 6820d;
 
         // when
-        Double totalAmount = bankTransactionProcessor.calculateTotalAmount();
+        Double actual = bankTransactionProcessor.calculateTotalAmount();
 
         // then
-        assertThat(totalAmount).isEqualTo(total);
+        assertThat(actual).isEqualTo(expected);
     }
 
     @Test
-    public void monthCalculateTotalAmount() {
-        //given
-        double totalResult = -30d;
+    public void testMonthCalculateTotalAmount() {
+        // given
+        double expected = -30d;
 
-        //when
-        double totalAmount = bankTransactionProcessor.monthCaclulateTotalAmount(month);
+        // when
+        double actual = bankTransactionProcessor.monthCaclulateTotalAmount(month);
 
-        //then
-        assertThat(totalAmount).isEqualTo(totalResult);
-        assertThat(totalAmount).isNotEqualTo(totalResult + 1);
+        // then
+        assertThat(actual).isEqualTo(expected);
     }
 
     @Test
-    public void yourCategoryCalculateTotalAmount() {
+    public void testYourCategoryCalculateTotalAmount() {
         // given
-        double resultAmount = 2950d;
+        double expected = 2950d;
 
         // when
-        double totalAmount = bankTransactionProcessor.yourCategoryCalculateTotalAmount(category);
+        double actual = bankTransactionProcessor.yourCategoryCalculateTotalAmount(category);
 
         // then
-        assertThat(resultAmount).isEqualTo(totalAmount);
+        assertThat(actual).isEqualTo(expected);
     }
 
     @Test
-    public void findTransactionGreaterThanEqaul() {
+    public void testFindTransactionGreaterThanEqaul() {
         // given
-        List<BankTransaction> bankTransactions = new ArrayList<>();
-        bankTransactions.add(new BankTransaction((LocalDate.of(2017, Month.FEBRUARY, 01)), 6000d, "Salary"));
-        bankTransactions.add(new BankTransaction((LocalDate.of(2017, Month.MARCH, 03)), 3000d, "Tesco"));
+        List<BankTransaction> expected = new ArrayList<>();
+        expected.add(new BankTransaction(LocalDate.of(2017, Month.FEBRUARY, 01), 6000d, "Salary"));
+        expected.add(new BankTransaction(LocalDate.of(2017, Month.MARCH, 03), 3000d, "Tesco"));
 
         // when
-        List<BankTransaction> resultGraterThanList = bankTransactionProcessor.findTransactionGreaterThanEqaul(graterThan);
+        List<BankTransaction> actual = bankTransactionProcessor.findTransactionGreaterThanEqaul(greaterThan);
 
         // then
-        assertThat(bankTransactions).isEqualTo(resultGraterThanList);
+        assertThat(actual).isEqualTo(expected);
     }
 }
