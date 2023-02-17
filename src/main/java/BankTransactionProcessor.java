@@ -72,9 +72,9 @@ public class BankTransactionProcessor {
 
     public List<BankTransaction> findTransactionInDescription(String description) {
         List<BankTransaction> result = new ArrayList<>();
-
-        for(BankTransaction bankTransaction : bankTransactions) {
-            if(bankTransaction.getDescription().equals(description)) {
+        
+        for (BankTransaction bankTransaction : bankTransactions) {
+            if (bankTransaction.getDescription().equals(description)) {
                 result.add(bankTransaction);
             }
         }
