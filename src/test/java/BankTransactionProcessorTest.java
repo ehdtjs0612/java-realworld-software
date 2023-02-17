@@ -12,10 +12,17 @@ class BankTransactionProcessorTest {
 
     List<BankTransaction> bankTransactionList;
     BankTransactionProcessor bankTransactionProcessor;
+
+    Month month;
+
+    String category;
+
     @BeforeEach
     public void setUp() {
         bankTransactionList = createBankTransaction();
         bankTransactionProcessor = new BankTransactionProcessor(bankTransactionList);
+        month = Month.MAY;
+        category = "Tesco";
     }
 
     private List<BankTransaction> createBankTransaction() {
@@ -46,7 +53,6 @@ class BankTransactionProcessorTest {
     public void monthCalculateTotalAmount() {
         //given
         double totalResult = -30d;
-        Month month = Month.MAY;
 
         //when
         double totalAmount = bankTransactionProcessor.monthCaclulateTotalAmount(month);
@@ -54,5 +60,17 @@ class BankTransactionProcessorTest {
         //then
         assertThat(totalAmount).isEqualTo(totalResult);
         assertThat(totalAmount).isNotEqualTo(totalResult + 1);
+    }
+
+    @Test
+    public void yourCategoryCalculateTotalAmount() {
+        // given
+        double resultAmount = 2950d;
+
+        // when
+        double totalAmount = bankTransactionProcessor.yourCategoryCalculateTotalAmount(category);
+
+        // then
+        assertThat(resultAmount).isEqualTo(totalAmount);
     }
 }
