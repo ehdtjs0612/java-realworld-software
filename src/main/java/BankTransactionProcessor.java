@@ -56,4 +56,17 @@ public class BankTransactionProcessor {
 
         return result;
     }
+
+    // 특정 월의 입출금 내역 찾기
+    public List<BankTransaction> findTransactionInMonth(Month month) {
+        List<BankTransaction> result = new ArrayList<>();
+
+        for(BankTransaction bankTransaction : bankTransactions) {
+            if(bankTransaction.getLocalDate().getMonth() == month) {
+                result.add(bankTransaction);
+            }
+        }
+
+        return result;
+    }
 }
