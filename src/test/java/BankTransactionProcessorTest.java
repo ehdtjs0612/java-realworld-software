@@ -86,4 +86,16 @@ class BankTransactionProcessorTest {
         // then
         assertThat(actual).isEqualTo(expected);
     }
+
+    @Test
+    public void testFindTransactionInMonth() {
+        // given
+        List<BankTransaction> expected = List.of()
+
+        // when
+        List<BankTransaction> actual = bankTransactionProcessor.findTransactionInMonth(month);
+
+        // then
+        assertThat(expected).isEqualTo(actual);
+    }
 }
