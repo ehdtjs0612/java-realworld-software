@@ -90,7 +90,9 @@ class BankTransactionProcessorTest {
     @Test
     public void testFindTransactionInMonth() {
         // given
-        List<BankTransaction> expected = List.of()
+        List<BankTransaction> expected = List.of(
+                new BankTransaction(LocalDate.of(2017, Month.MAY, 05), -30d, "Cinema")
+        );
 
         // when
         List<BankTransaction> actual = bankTransactionProcessor.findTransactionInMonth(month);
