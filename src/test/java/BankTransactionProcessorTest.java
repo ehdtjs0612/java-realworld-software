@@ -76,9 +76,10 @@ class BankTransactionProcessorTest {
     @Test
     public void testFindTransactionGreaterThanEqaul() {
         // given
-        List<BankTransaction> expected = new ArrayList<>();
-        expected.add(new BankTransaction(LocalDate.of(2017, Month.FEBRUARY, 01), 6000d, "Salary"));
-        expected.add(new BankTransaction(LocalDate.of(2017, Month.MARCH, 03), 3000d, "Tesco"));
+        List<BankTransaction> expected = List.of(
+                new BankTransaction(LocalDate.of(2017, Month.FEBRUARY, 01), 6000d, "Salary"),
+                new BankTransaction(LocalDate.of(2017, Month.MARCH, 03), 3000d, "Tesco")
+        );
 
         // when
         List<BankTransaction> actual = bankTransactionProcessor.findTransactionGreaterThanEqaul(greaterThan);
