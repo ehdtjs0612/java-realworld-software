@@ -1,4 +1,5 @@
 import java.time.Month;
+import java.util.ArrayList;
 import java.util.List;
 
 public class BankTransactionProcessor {
@@ -41,5 +42,18 @@ public class BankTransactionProcessor {
         }
 
         return totalAmount;
+    }
+
+    //특정 금액 이상의 은행 거래 내역 찾기
+    public List<BankTransaction> findTransactionGreaterThanEqaul(int amount) {
+        List<BankTransaction> result = new ArrayList<>();
+
+        for(BankTransaction bankTransaction : bankTransactions) {
+            if(bankTransaction.getAmount() >= amount) {
+                result.add(bankTransaction);
+            }
+        }
+
+        return result;
     }
 }
