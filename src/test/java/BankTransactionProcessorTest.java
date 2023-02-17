@@ -101,4 +101,19 @@ class BankTransactionProcessorTest {
         // then
         assertThat(expected).isEqualTo(actual);
     }
+
+    @Test
+    public void testFindTransactionInDescription() {
+        // given
+        List<BankTransaction> expected = List.of(
+                new BankTransaction(LocalDate.of(2017, Month.JANUARY, 30), -50d, "Tesco"),
+                new BankTransaction(LocalDate.of(2017, Month.MARCH, 03), 3000d, "Tesco")
+        );
+
+        // when
+        List<BankTransaction> actual = bankTransactionProcessor.findTransactionInDescription("Tesco");
+
+        // then
+        assertThat(expected).isEqualTo(actual);
+    }
 }
