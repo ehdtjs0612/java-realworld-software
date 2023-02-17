@@ -41,4 +41,18 @@ class BankTransactionProcessorTest {
         // then
         assertThat(totalAmount).isEqualTo(total);
     }
+
+    @Test
+    public void monthCalculateTotalAmount() {
+        //given
+        double totalResult = -30d;
+        Month month = Month.MAY;
+
+        //when
+        double totalAmount = bankTransactionProcessor.monthCaclulateTotalAmount(month);
+
+        //then
+        assertThat(totalAmount).isEqualTo(totalResult);
+        assertThat(totalAmount).isNotEqualTo(totalResult + 1);
+    }
 }
