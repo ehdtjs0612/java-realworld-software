@@ -17,12 +17,15 @@ class BankTransactionProcessorTest {
 
     String category;
 
+    int graterThan;
+
     @BeforeEach
     public void setUp() {
         bankTransactionList = createBankTransaction();
         bankTransactionProcessor = new BankTransactionProcessor(bankTransactionList);
         month = Month.MAY;
         category = "Tesco";
+        graterThan = 3000;
     }
 
     private List<BankTransaction> createBankTransaction() {
@@ -72,5 +75,19 @@ class BankTransactionProcessorTest {
 
         // then
         assertThat(resultAmount).isEqualTo(totalAmount);
+    }
+
+    @Test
+    public void findTransactionGreaterThanEqaul() {
+        // given
+        List<BankTransaction> bankTransactions = new ArrayList<>();
+        bankTransactions.add(new BankTransaction((LocalDate.of(2017, Month.FEBRUARY, 01)), 6000d, "Salary"));
+        bankTransactions.add(new BankTransaction((LocalDate.of(2017, Month.MARCH, 03)), 3000d, "Tesco"));
+
+        // when
+        List<BankTransaction> resultGraterThanList = bankTransactionProcessor.findTransactionGreaterThanEqaul(graterThan);
+
+        // then
+        assertThat(bankTransactions).isEqualTo(resultGraterThanList);
     }
 }
